@@ -127,10 +127,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mmp.enable.3g2=true \
     vendor.mediacodec.binder.size=6
 
-# System
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vndk.version=current
-
 # Memory optimization
 PRODUCT_ODM_PROPERTIES += \
     ro.vendor.qti.am.reschedule_service=true \
