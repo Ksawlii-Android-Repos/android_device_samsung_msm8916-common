@@ -107,6 +107,10 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     GcamGo
 
+# Configuring device during boot
+PRODUCT_PACKAGES += \
+    init.post_boot.sh
+
 # Connectivity Engine support
 PRODUCT_PACKAGES += \
     libcnefeatureconfig
