@@ -147,7 +147,7 @@ PRODUCT_ODM_PROPERTIES += \
     ro.lmk.use_minfree_levels=true \
     ro.lmk.enhance_batch_kill=true \
     ro.lmk.vmpressure_file_min=80640 \
-    ro.config.zram.size=512 \
+    ro.config.zram.size=1028 \
     ro.config.zram.enabled=true \
     ro.config.avoid_gfx_accel=true
 
