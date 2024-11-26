@@ -129,6 +129,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Memory optimization
 PRODUCT_ODM_PROPERTIES += \
+    ro.config.max_starting_bg=8 \
     ro.vendor.qti.am.reschedule_service=true \
     ro.vendor.qti.sys.fw.bservice_enable=true \
     dalvik.vm.madvise-random=true \
