@@ -84,6 +84,9 @@ TARGET_USES_QTI_CAMERA_DEVICE := true
 # Charger
 BOARD_CHARGER_SHOW_PERCENTAGE   := true
 
+# Use deprecated non_ab OTA
+AB_OTA_UPDATER := false
+
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
 ifneq ($(TARGET_BUILD_VARIANT),eng)
