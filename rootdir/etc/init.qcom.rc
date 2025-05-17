@@ -615,6 +615,9 @@ service vendor.qcamerasvr /vendor/bin/mm-qcamera-daemon
     user camera
     group camera system inet input graphics
 
+on property:sys.boot_completed=1
+    restart cameraserver
+
 service vendor.qseecomd /vendor/bin/qseecomd
    class core
    user root
