@@ -31,7 +31,10 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage
 
 # Properties
--include $(LOCAL_PATH)/system_prop.mk
+-include $(LOCAL_PATH)/configs/props/system_prop.mk
+
+TARGET_SYSTEM_PROP += \
+    device/samsung/msm8916-common/system.prop
 
 # APEX
 PRODUCT_COPY_FILES += \

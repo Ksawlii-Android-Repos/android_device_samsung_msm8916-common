@@ -147,7 +147,7 @@ PRODUCT_ODM_PROPERTIES += \
     ro.config.zram.enabled=true \
     ro.config.avoid_gfx_accel=true
 
-# Misc.
+# Misc
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0 \
     dev.pm.dyn_samplingrate=1 \
