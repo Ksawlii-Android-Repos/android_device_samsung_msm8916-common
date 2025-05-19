@@ -49,6 +49,8 @@ echo 0 > /sys/module/vmpressure/parameters/allocstall_threshold
 echo 1 > /proc/sys/vm/kswapd_threads
 
 echo 5430 > /proc/sys/vm/min_free_kbytes
+echo 0 > /proc/sys/vm/admin_reserve_kbytes
+echo 0 > /proc/sys/vm/user_reserve_kbytes
 
 # Set lowest possible timeslice for SCHED_RR tasks
 echo 1 > /proc/sys/kernel/sched_rr_timeslice_ms
