@@ -31,6 +31,11 @@ sysctl -w kernel.sched_ravg_hist_size=2
 echo 1 > /sys/devices/platform/kcal_ctrl.0/kcal_enable
 echo 261 > /sys/devices/platform/kcal_ctrl.0/kcal_sat
 
+# Virtual memory management
+echo 0 > /proc/sys/vm/extra_free_kbytes
+echo 230 > /proc/sys/vm/watermark_scale_factor
+echo 10572 > /proc/sys/vm/min_free_kbytes
+
 # Limit CPU and IO resources for background tasks
 echo 102 > /dev/cpuctl/background/cpu.shares
 echo 100 > /dev/blkio/background/blkio.weight
