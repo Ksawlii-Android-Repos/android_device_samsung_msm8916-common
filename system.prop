@@ -70,15 +70,12 @@ persist.sys.purgeable_assets=1
 # More free ram and apps load faster
 dalvik.vm.dexopt-flags=m=y
 
-
 # Increase some Performance
 ro.secure=0
-
 
 # Reduce the black screen time of the proximity sensor
 ro.lge.proximity.delay=15
 mot.proximity.delay=15
-
 
 # Smoothens UI
 persist.service.lgospd.enable=0

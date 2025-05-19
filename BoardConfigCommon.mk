@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017-2018 The LineageOS Project
+# Copyright (C) 2017-2025 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+#
 
 COMMON_PATH := device/samsung/msm8916-common
 
 # Inherit from common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
-
 # Architecture/platform
-
 FORCE_32_BIT := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv8-a
@@ -70,7 +69,6 @@ BLUETOOTH_HCI_USE_MCT := true
 # Bootanimation
 TARGET_BOOTANIMATION_PRELOAD := true
 TARGET_BOOTANIMATION_TEXTURE_CACHE := true
-#TARGET_BOOTANIMATION_HALF_RES := true
 
 # Bootloader
 BOARD_PROVIDES_BOOTLOADER_MESSAGE := false
@@ -159,6 +157,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 LZMA_RAMDISK_TARGETS := recovery
+
 # Smaller kernel config for recovery
 TARGET_KERNEL_RECOVERY_CONFIG := msm8916_sec_recovery_defconfig
 TARGET_KERNEL_CONFIG := msm8916_sec_defconfig
@@ -176,7 +175,7 @@ endif
 # Malloc implementation
 MALLOC_SVELTE := true
 
-# memfd
+# Memfd
 TARGET_HAS_MEMFD_BACKPORT := true
 
 # Media
@@ -251,18 +250,8 @@ ifeq ($(RECOVERY_VARIANT),twrp)
 	BOARD_GLOBAL_CFLAGS += -DTW_USE_MINUI_CUSTOM_FONTS
 endif
 
-#ifneq ($(wildcard bootable/recovery-twrp),)
-#	RECOVERY_VARIANT := twrp
-#endif
-
-# SELinux
-#include device/qcom/sepolicy-legacy/sepolicy.mk
-
 BOARD_VENDOR_SEPOLICY_DIRS += device/samsung/msm8916-common/sepolicy/vendor
-#PLAT_PRIVATE_POLICY += device/samsung/msm8916-common/sepolicy/private
 SELINUX_IGNORE_NEVERALLOWS := true
-#BOARD_SEPOLICY_DIRS += \
-#    $(COMMON_PATH)/sepolicy_tmp
 
 # Shims
 TARGET_LD_SHIM_LIBS := \
@@ -294,4 +283,3 @@ WLAN_CHIPSET := pronto
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 WIFI_HIDL_FEATURE_DISABLE_AP_MAC_RANDOMIZATION := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
-

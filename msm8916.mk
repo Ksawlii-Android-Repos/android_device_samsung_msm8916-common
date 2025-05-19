@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2017-2018 The LineageOS Project
+# Copyright (C) 2017-2025 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 # Inherit from common
 $(call inherit-product, device/samsung/qcom-common/qcom-common.mk)
 
+# Inherit langs
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Include proprietary blobs
@@ -181,7 +182,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fsck.f2fs
 
-
 # Gatekeeper
 PRODUCT_PACKAGES += \
     android.hardware.gatekeeper@1.0-service.software \
@@ -248,7 +248,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
 
-
 # Netmgrd
 PRODUCT_PACKAGES += \
     android.system.net.netd@1.1.vendor
@@ -278,7 +277,6 @@ PRODUCT_PACKAGES += \
     libcurl \
     libkeyutils \
     tcpdump
-
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -360,10 +358,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/seccomp/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
-# System.prop tweaks
-#TARGET_SYSTEM_PROP += \
-#    device/samsung/msm8916-common/system.prop
-
 # Security configuration file
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:$(TARGET_COPY_OUT_VENDOR)/etc/sec_config
@@ -408,7 +402,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     com.android.media.remotedisplay \
     com.android.media.remotedisplay.xml
-
 
 # Wifi
 PRODUCT_PACKAGES += \
