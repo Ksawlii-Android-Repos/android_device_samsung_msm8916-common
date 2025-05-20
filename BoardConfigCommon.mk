@@ -19,16 +19,6 @@ COMMON_PATH := device/samsung/msm8916-common
 # Inherit from common
 -include device/samsung/qcom-common/BoardConfigCommon.mk
 
-# Architecture/platform
-FORCE_32_BIT := true
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv8-a
-TARGET_BOARD_PLATFORM := msm8916
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_VARIANT := generic
-TARGET_CPU_VARIANT_RUNTIME := cortex-a53
-
 # Allow overriding commands during build
 BUILD_BROKEN_DUP_RULES := true
 
@@ -41,6 +31,16 @@ BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 # APEX
 DEXPREOPT_GENERATE_APEX_IMAGE := true
 TARGET_FLATTEN_APEX := true
+
+# Architecture/platform
+FORCE_32_BIT := true
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv8-a
+TARGET_BOARD_PLATFORM := msm8916
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a53
 
 # Low Memory Devices
 MALLOC_SVELTE := true
@@ -87,6 +87,9 @@ BOARD_CHARGER_SHOW_PERCENTAGE   := true
 # Use deprecated non_ab OTA
 AB_OTA_UPDATER := false
 
+# Dedupe VNDK libraries with identical core variants.
+TARGET_VNDK_USE_CORE_VARIANT := true
+
 # Dexpreopt
 ifeq ($(HOST_OS),linux)
 ifneq ($(TARGET_BUILD_VARIANT),eng)
@@ -98,9 +101,6 @@ WITH_DEXPREOPT_PIC := true
 WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
 endif
 endif
-
-# Dedupe VNDK libraries with identical core variants.
-TARGET_VNDK_USE_CORE_VARIANT := true
 
 # Display
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -161,19 +161,17 @@ BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 LZMA_RAMDISK_TARGETS := recovery
 
-# Smaller kernel config for recovery
-TARGET_KERNEL_RECOVERY_CONFIG := msm8916_sec_recovery_defconfig
-TARGET_KERNEL_CONFIG := msm8916_sec_defconfig
-TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
-TARGET_KERNEL_SELINUX_LOG_CONFIG := selinux_log_defconfig
-TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
-TARGET_KERNEL_CLANG_COMPILE := false
-
 # Kernel - Toolchain
 ifneq ($(wildcard $(BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-7.2/bin),)
     KERNEL_TOOLCHAIN := $(BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-7.2/bin
     KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 endif
+
+# Legacy BLOB Support
+TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
+    /system/bin/mediaserver=22 \
+    /system/vendor/bin/mm-qcamera-daemon=22 \
+    /system/vendor/bin/hw/rild=27
 
 # Malloc implementation
 MALLOC_SVELTE := true
@@ -182,7 +180,7 @@ MALLOC_SVELTE := true
 TARGET_HAS_MEMFD_BACKPORT := true
 
 # Media
-TARGET_QCOM_MEDIA_VARIANT           := caf
+TARGET_QCOM_MEDIA_VARIANT := caf
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
 
 # Network Routing
@@ -194,20 +192,9 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE  := 15728640
 BOARD_CACHEIMAGE_PARTITION_SIZE     := 314572800
 BOARD_FLASH_BLOCK_SIZE              := 131072
 
-# APEX image
-DEXPREOPT_GENERATE_APEX_IMAGE := true
-
-# Legacy BLOB Support
-TARGET_PROCESS_SDK_VERSION_OVERRIDE += \
-    /system/bin/mediaserver=22 \
-    /system/vendor/bin/mm-qcamera-daemon=22 \
-    /system/vendor/bin/hw/rild=27
-
 # Power
 TARGET_USES_INTERACTION_BOOST := true
 
-# Radio
-TARGET_USES_OLD_MNC_FORMAT := true
 # Protobuf
 PROTOBUF_SUPPORTED := true
 
@@ -216,6 +203,9 @@ TARGET_USES_QCOM_BSP := true
 HAVE_SYNAPTICS_I2C_RMI4_FW_UPGRADE := true
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY := true
 BOARD_USES_QCOM_HARDWARE := true
+
+# Radio
+TARGET_USES_OLD_MNC_FORMAT := true
 
 # Recovery
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := $(COMMON_PATH)/recovery/recovery_keys.c
@@ -253,6 +243,7 @@ ifeq ($(RECOVERY_VARIANT),twrp)
 	BOARD_GLOBAL_CFLAGS += -DTW_USE_MINUI_CUSTOM_FONTS
 endif
 
+# Selinux
 BOARD_VENDOR_SEPOLICY_DIRS += device/samsung/msm8916-common/sepolicy/vendor
 SELINUX_IGNORE_NEVERALLOWS := true
 
@@ -265,6 +256,14 @@ TARGET_LD_SHIM_LIBS := \
     /vendor/lib/libizat_core.so|libshim_gps.so \
     /vendor/lib/libqomx_jpegenc.so|libboringssl-compat.so \
     /vendor/lib/libgeofence.so|liblocadapterbase_shim.so
+
+# Smaller kernel config for recovery
+TARGET_KERNEL_RECOVERY_CONFIG := msm8916_sec_recovery_defconfig
+TARGET_KERNEL_CONFIG := msm8916_sec_defconfig
+TARGET_KERNEL_SELINUX_CONFIG := selinux_defconfig
+TARGET_KERNEL_SELINUX_LOG_CONFIG := selinux_log_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8916
+TARGET_KERNEL_CLANG_COMPILE := false
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true

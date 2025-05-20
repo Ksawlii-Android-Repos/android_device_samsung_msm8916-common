@@ -25,17 +25,6 @@ $(call inherit-product-if-exists, vendor/samsung/msm8916-common/msm8916-common-v
 
 LOCAL_PATH := device/samsung/msm8916-common
 
-# Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
-
-# Properties
--include $(LOCAL_PATH)/configs/props/system_prop.mk
-
-TARGET_SYSTEM_PROP += \
-    device/samsung/msm8916-common/configs/props/system.prop
-
 # APEX
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/ld.config.txt:$(TARGET_COPY_OUT_SYSTEM)/etc/swcodec/ld.config.txt
@@ -154,14 +143,6 @@ PRODUCT_PACKAGES += \
     libtinyxml2 \
     memtrack.msm8916
 
-# LiveDisplay
-PRODUCT_PACKAGES += \
-    vendor.lineage.livedisplay@2.0-service.samsung-qcom
-    
-# Touch
-PRODUCT_PACKAGES += \
-    vendor.lineage.touch@1.0-service.samsungfake
-
 # Doze
 PRODUCT_PACKAGES += \
     SamsungDoze
@@ -243,6 +224,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.light@2.0-service.msm8916
 
+# LiveDisplay
+PRODUCT_PACKAGES += \
+    vendor.lineage.livedisplay@2.0-service.samsung-qcom
+
 # Media configurations
 ifneq ($(TARGET_BOARD_PLATFORM_VARIANT),msm8929)
 PRODUCT_COPY_FILES += \
@@ -257,10 +242,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_video_le.xml
-
-# Netmgrd
-PRODUCT_PACKAGES += \
-    android.system.net.netd@1.1.vendor
 
 # Media
 PRODUCT_PACKAGES += \
@@ -288,6 +269,15 @@ PRODUCT_PACKAGES += \
     libkeyutils \
     tcpdump
 
+# Netmgrd
+PRODUCT_PACKAGES += \
+    android.system.net.netd@1.1.vendor
+
+# Overlays
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage
+
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
@@ -307,6 +297,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
 
+# Properties
+-include $(LOCAL_PATH)/configs/props/system_prop.mk
+
+TARGET_SYSTEM_PROP += \
+    device/samsung/msm8916-common/configs/props/system.prop
+
 # Power configuration
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf
@@ -321,6 +317,10 @@ PRODUCT_PACKAGES += \
     libshim_secril \
     libxml2 \
     macloader
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
 
 # Rootdir
 PRODUCT_PACKAGES += \
@@ -343,10 +343,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/etc/fstab.qcom:$(TARGET_COPY_OUT_RAMDISK)/fstab.qcom
-
-# RenderScript HAL
-PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl
 
 # RRO
 PRODUCT_ENFORCE_RRO_TARGETS := \
@@ -384,6 +380,10 @@ PRODUCT_SOONG_NAMESPACES += \
 # Tethering
 PRODUCT_PACKAGES += \
     TetheringConfigOverlay
+
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.samsungfake
 
 # USB HAL
 PRODUCT_PACKAGES += \
