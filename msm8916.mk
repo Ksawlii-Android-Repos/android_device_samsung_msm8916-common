@@ -34,7 +34,7 @@ DEVICE_PACKAGE_OVERLAYS += \
 -include $(LOCAL_PATH)/configs/props/system_prop.mk
 
 TARGET_SYSTEM_PROP += \
-    device/samsung/msm8916-common/system.prop
+    device/samsung/msm8916-common/configs/props/system.prop
 
 # APEX
 PRODUCT_COPY_FILES += \
