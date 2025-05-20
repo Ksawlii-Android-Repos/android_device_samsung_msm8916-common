@@ -130,6 +130,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/data/netmgr_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/netmgr_config.xml \
     $(LOCAL_PATH)/configs/data/qmi_config.xml:$(TARGET_COPY_OUT_VENDOR)/etc/data/qmi_config.xml
 
+# Debloat
+PRODUCT_PACKAGES += \
+    debloat
+
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     TrebuchetQuickStep \
@@ -175,11 +179,6 @@ PRODUCT_PACKAGES += \
 
 # Exclude AudioFX
 TARGET_EXCLUDES_AUDIOFX := true
-
-# FM
-PRODUCT_PACKAGES += \
-    qcom.fmradio \
-    FMRadio
 
 # For config.fs
 PRODUCT_PACKAGES += \
